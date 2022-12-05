@@ -46,6 +46,9 @@ def IFT8_reconstruction_2D(field, LOS_starts, LOS_ends, noise_lvl):
     signal = ift.log(ift.Adder(1., domain=position_space)(ift.exp(padder(correlated_field))))
 
     # Build the line-of-sight response and define signal response
+    print(LOS_starts)
+    print("\n")
+    print(LOS_ends)
     R = ift.LOSResponse(position_space, starts=LOS_starts, ends=LOS_ends)
     signal_response = R(signal)
 

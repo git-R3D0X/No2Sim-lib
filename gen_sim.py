@@ -13,8 +13,8 @@ matplotlib.use("TkAgg")
 
 # ---------------------- 3D -----------
 
-dimension = "3D"
-field = make_random_3D_field_NIFTy([300, 300]).val
+dimension = "2D"
+field = generate_random_field_nogauss([300, 300]) #  .val
 plt.imshow(field, cmap="inferno")
 plt.colorbar()
 plt.show()
@@ -68,52 +68,6 @@ measurements, LOS_starts, LOS_ends = MDevices.measure()
 
 lines = MDevices.return_plottables()
 
-mean_rslt, std_rslt, master = IFT8_reconstruction_3D(field, LOS_starts, LOS_ends, .0001)
+mean_rslt, std_rslt, master = IFT8_reconstruction_2D(field, LOS_starts, LOS_ends, .0001)
 
 Plotting(field, DOASs, REFLs, MDevices, lines, measurements, dimension, mean_rslt, std_rslt, master)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
