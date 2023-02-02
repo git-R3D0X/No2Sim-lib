@@ -21,6 +21,10 @@ class Measurement_Devices:
         else:
             self.dim = 3
         print("Measurement Devices: \"The Dimension of the field is {}\"".format(self.dim))
+    
+    def change_field(self, new_field):
+        print("Measurement Devices: \"changing fields\"")
+        self.simulated_field = new_field
 
     def print_parameters(self):
         for DOAS_device in self.DOAS_devices:
@@ -64,7 +68,6 @@ class Measurement_Devices:
                         LOS_ends[1].append(refl_pos[i][1] / self.simulated_field.shape[1])
                 return LOS_starts, LOS_ends
             else:
-
                 LOS_starts = [[], [], []]
                 LOS_ends = [[], [], []]
                 for doas in doas_pos:
@@ -78,10 +81,10 @@ class Measurement_Devices:
                 return LOS_starts, LOS_ends
 
         position_space = ift.RGSpace(self.simulated_field.shape)
+        ground_truth = ift.makeField(domain=position_space, arr=self.simulated_field)
         DOAS_positions, REFL_positions = self.return_positions()
         LOS_starts, LOS_ends = build_LOSs(DOAS_positions, REFL_positions)
         R = ift.LOSResponse(position_space, starts=LOS_starts, ends=LOS_ends)
-        ground_truth = ift.makeField(position_space, self.simulated_field)
         data = R(ground_truth)
 
         #plot = ift.Plot()

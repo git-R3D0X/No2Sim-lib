@@ -6,15 +6,15 @@ class DOAS:
     orientation: Viewing direction (Array with 3 Angles alpha, beta, gamma)
     """
 
-    def __init__(self, ID, position, orientation):
+    def __init__(self, ID, position, orientation=None):
         self.position = np.array(position)
         self.ID = ID
-        self.orientation = np.array(orientation)
+        # self.orientation = np.array(orientation)
 
     def print_parameters(self):
         print("Type:", "DOAS-Device")
         print("ID:", self.ID)
-        print("orientation:", self.orientation)
+        # print("orientation:", self.orientation)
         print("position:", self.position)
         print("-------------------------------------")
 

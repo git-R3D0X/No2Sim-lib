@@ -228,11 +228,7 @@ def IFT8_reconstruction_3D(field, LOS_starts, LOS_ends, noise_lvl):
     n_samples = lambda iiter: 3 if iiter < 5 else 8
     samples = ift.optimize_kl(likelihood_energy, n_iterations, n_samples,
                               minimizer, ic_sampling, minimizer_sampling,
-                              plottable_operators={"signal": (signal, dict(vmin=0, vmax=1)),
-                                                   "power spectrum": pspec},
-                              ground_truth_position=None,
-                              output_directory="output_ift_inversion",
-                              overwrite=True, comm=comm)
+                              output_directory="output_ift_inversion", comm=comm)
 
     if True:
         # Load result from disk. May be useful for long inference runs, where
@@ -275,4 +271,4 @@ def IFT8_reconstruction_3D(field, LOS_starts, LOS_ends, noise_lvl):
     #         title="Sampled Posterior Power Spectrum",
     #         linewidth=[1.] * nsamples + [3., 3.],
     #         label=[None] * nsamples + ['Ground truth', 'Posterior mean'])
-    return mean.val, var.sqrt().val, master
+    return mean.val, var.sqrt().val, master, R(mean).val
